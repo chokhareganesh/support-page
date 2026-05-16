@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support Ganesh ☕</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0d1117;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: #e6edf3;
+    }
+
+    .card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 16px;
+      padding: 48px 40px;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f7931a, #e6522c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      margin: 0 auto 20px;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #f0f6fc;
+    }
+
+    .tagline {
+      color: #8b949e;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    .bio-tree {
+      font-size: 0.85rem;
+      color: #3fb950;
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .btn {
+      display: grid;
+      grid-template-columns: 28px 1fr 28px;
+      align-items: center;
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.15s, transform 0.1s;
+      cursor: pointer;
+      border: none;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .btn img, .btn svg { justify-self: start; }
+
+    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-upi {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: #fff;
+    }
+
+    .upi-card {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 14px;
+    }
+
+    .upi-card-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #8b949e;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 16px;
+    }
+
+    .upi-card-body {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .upi-qr img {
+      width: 110px;
+      height: 110px;
+      border-radius: 8px;
+      display: block;
+      background: #fff;
+    }
+
+    .upi-details {
+      flex: 1;
+      text-align: left;
+    }
+
+    .upi-details p {
+      font-size: 0.78rem;
+      color: #8b949e;
+      margin-bottom: 8px;
+    }
+
+    .upi-chip {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.88rem;
+      color: #79c0ff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      transition: border-color 0.15s;
+    }
+
+    .upi-chip:hover { border-color: #58a6ff; }
+
+    .upi-chip svg { flex-shrink: 0; }
+
+    .copy-hint {
+      font-size: 0.7rem;
+      color: #484f58;
+      margin-top: 6px;
+    }
+
+    .copy-hint.ok { color: #3fb950; }
+
+    .upi-open {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: #7c3aed;
+      text-decoration: none;
+    }
+
+    .upi-open:hover { text-decoration: underline; }
+
+    .btn-upi-toggle {
+      display: grid;
+      grid-template-columns: 28px 1fr 28px;
+      align-items: center;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: #fff;
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      margin-bottom: 0;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+
+    .btn-upi-toggle:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-upi-toggle:active { transform: translateY(0); }
+
+    .upi-chevron {
+      justify-self: end;
+      transition: transform 0.25s;
+    }
+
+    .upi-chevron.open { transform: rotate(180deg); }
+
+    .upi-collapse {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .upi-collapse.open {
+      max-height: 300px;
+    }
+
+    .upi-wrapper {
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .btn-coffee {
+      background: #ffdd00;
+      color: #1a1a1a;
+    }
+
+    .upi-id {
+      margin-top: 24px;
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      color: #79c0ff;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      user-select: all;
+      position: relative;
+    }
+
+    .upi-id::after {
+      content: 'click to copy';
+      display: block;
+      font-size: 0.72rem;
+      color: #484f58;
+      margin-top: 4px;
+      font-family: inherit;
+      letter-spacing: 0;
+    }
+
+    .upi-id.copied::after {
+      content: '✓ copied!';
+      color: #3fb950;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 20px 0;
+      color: #484f58;
+      font-size: 0.8rem;
+    }
+
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #30363d;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="avatar">
+      <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 8h1a4 4 0 0 1 0 8h-1"/>
+        <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>
+        <line x1="6" y1="2" x2="6" y2="4"/>
+        <line x1="10" y1="2" x2="10" y2="4"/>
+        <line x1="14" y1="2" x2="14" y2="4"/>
+      </svg>
+    </div>
+    <h1>Hey, I'm Ganesh</h1>
+    <p class="tagline">
+      I build tools for problems others walk past —<br>
+      the overlooked gaps, the missing pieces.
+    </p>
+    <p class="bio-tree">🌳 I also plant trees. One coffee = one more reason to plant another.</p>
+
+    <a class="btn btn-coffee" href="https://buy.polar.sh/polar_cl_SnnZxG1styq1zbzDzoY1a6wR4NR5bi8wwTryY2g1Mcw" target="_blank" rel="noopener">
+      <img src="Polar-log.png" alt="Polar" style="height:20px; width:auto; object-fit:contain;" />
+      Support on Polar.sh
+    </a>
+
+    <div class="divider">or</div>
+
+    <div class="upi-wrapper">
+      <button class="btn-upi-toggle" onclick="toggleUPI()" aria-expanded="false" id="upiToggle">
+        <img src="upi-logo.png" alt="UPI" style="height:22px; width:auto; object-fit:contain;" />
+        Pay via UPI
+        <svg class="upi-chevron" id="upiChevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="upi-collapse" id="upiCollapse">
+        <div class="upi-card" style="border:none; border-top: 1px solid #30363d; border-radius:0; margin-bottom:0;">
+          <div class="upi-card-body">
+            <div class="upi-qr">
+              <img
+                src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=upi://pay?pa=ganesh-c%40ybl%26pn=Ganesh%26cu=INR"
+                alt="UPI QR Code"
+              />
+            </div>
+            <div class="upi-details">
+              <p>Scan QR  <em>or</em>  copy UPI ID</p>
+              <div class="upi-chip" onclick="copyUPI()">
+                <span>ganesh-c@ybl</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              </div>
+              <div class="copy-hint" id="copyHint">click to copy</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleUPI() {
+      const collapse = document.getElementById('upiCollapse');
+      const chevron  = document.getElementById('upiChevron');
+      const toggle   = document.getElementById('upiToggle');
+      const open = collapse.classList.toggle('open');
+      chevron.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', open);
+    }
+
+    function copyUPI() {
+      const hint = document.getElementById('copyHint');
+      navigator.clipboard.writeText('ganesh-c@ybl').then(() => {
+        hint.textContent = '✓ copied!';
+        hint.classList.add('ok');
+        setTimeout(() => {
+          hint.textContent = 'click to copy';
+          hint.classList.remove('ok');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
